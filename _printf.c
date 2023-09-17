@@ -109,7 +109,7 @@ int _printBuffer(char *string)
 				}
 			}
 			string++;
-		}`
+		}
 	}
 	if (i > 0)
 		write(1, buffer, i);
