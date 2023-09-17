@@ -8,14 +8,20 @@
 typedef struct format
 {
 	char c;
-	int (*fc(char))(int, ...);
+	int (*fc)(int, ...);
 
 }check;
 
+
 #define BUFFER_SIZE 1024
 
-_printf(const char *format, ...);
+int _printf(const char *format, ...);
 int _putchar(char c);
-int printBuffer(char *string);
+int _printBuffer(char *string);
+int printString(int, ...);
+int printChar(int, ...);
+int printInt(int, ...);
+check checkFormat(char);
+char *string_copy(const char *string);
 
 #endif

@@ -12,11 +12,12 @@
  *
  */
 
-int (*checkFormat(char character))(int, ...)
+check checkFormat(char character)
 {
+	check returnFormat;
 	int i = 0;
 	check formatCheck[] = {
-		{'c', printChar
+		{'c', printChar},
 		{'s', printString},
 		{'i', printInt},
 		{'d', printInt},
@@ -27,8 +28,12 @@ int (*checkFormat(char character))(int, ...)
 	{
 		if (formatCheck[i].c == character)
 		{
-			return (formatCheck[i].fs);	
+			returnFormat.c = formatCheck[i].c;
+			returnFormat.fc = formatCheck[i].fc;
+			return (returnFormat);
 		}
 	}
-	return (NULL);
+	returnFormat.c = '\0';
+	returnFormat.fc = NULL;
+	return (returnFormat);
 }

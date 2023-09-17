@@ -17,11 +17,12 @@ int printString(int i, ...)
 	string = va_arg(list, char *);
 	if (string == NULL)
 		return (-1);
-
+	i = 0;
 	while(string[i])
 		i++;
 	i++;
 	write(1, string, i);
+	va_end(list);
 	return(i);
 
 }
@@ -29,10 +30,14 @@ int printString(int i, ...)
 int printChar(int i, ...)
 {
 	va_list character;
+	char temp;
 	
 	va_start(character, i);
-	i++;
-	putchar(va_arg(character, char));
+
+	i = 1;
+	temp = va_arg(character, int);
+	_putchar(temp);
+	va_end(character);
 	return (i);
 
 }

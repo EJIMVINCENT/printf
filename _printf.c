@@ -11,43 +11,50 @@
 
 int _printf(const char *format, ...)
 {
+	char *format_copy;
 	va_list arg_list;
-	int i = 0, count = 0, printed = 0, printedChar = 0;
-	int (*print_arg)(int, ...)
+	int printed = 0, printedChar = 0;
+	check print_arg;
 
 	if (format == NULL)
 		return (-1);
 
-       va_start(arg_list, format);
-      
-	while (*format)
-	{
-		if (*format != '%')
-		{
-			printedChar += _printBuffer(format);
-		}
+	va_start(arg_list, format);
 
-		else if (*format == '%')
+	format_copy = string_copy(format);
+	if (format_copy == NULL)
+	       return (-1);
+      
+	while (*format_copy != '\0')
+	{
+		if (*format_copy != '%')
+			printedChar += _printBuffer(format_copy);
+
+		else 
 		{
-			format++;
-			print_arg = checkFormat(*format);
-			if (print_arg == NULL)
-				return (-1);
-			switch(print_arg)
+			print_arg = checkFormat(*format_copy);
+			switch(print_arg.c)
 			{
-				case printInt:
-					printed = print_arg(0, va_arg(arg_list, int));
-				case printChar:
-					printed = print_arg(0, va_arg(arg_list, char));
-				case printString:
-					printed = print_arg(0, va_arg(arg_list, char));
+				case 'i':
+					printed = print_arg.fc(0, va_arg(arg_list, int));
+					break;
+				case 'd':
+					printed = print_arg.fc(0, va_arg(arg_list, int));
+					break;
+				case 'c':
+					printed = print_arg.fc(0, va_arg(arg_list, int));
+					break;
+				case 's':
+					printed = print_arg.fc(0, va_arg(arg_list, char *));
+					break;
 			}
 			if (printed == -1)
 				return (-1);
 			printedChar += printed;
 		}
-		format++;	
+		format_copy++;	
 	}
+	free(format_copy);
 	va_end(arg_list);
 	return (printedChar);
 }
@@ -64,29 +71,72 @@ int _printf(const char *format, ...)
 int _printBuffer(char *string)
 {
 	char buffer[BUFFER_SIZE];
-	int i = 0, count = 0;
+	int i = 0;
+	int count = 0;
 
-	while (*string)
+	while (*string != '\0')
 	{
 		if (*string != '%')
 		{
-			buffer[i++] = *string;
-			string++;
+			buffer[i] = *string;
+			i++;
 
 			if (i == BUFFER_SIZE)
-                        {
-				count += i + 1;
-				write(1, buffer, i + 1);
+			{
+				count += i; 
+				write(1, buffer, i);
+		
 				i = 0;
 			}
+			string++;
 		}
-
-		else if (*format == '%')
+		else if (*string == '%')
 		{
-			if (buffer > 0)
-				write(1, buffer, i + 1);
-			return (count);
-		
-		}
+			string++;
+			if (*string == '%')
+			{
+				buffer[i++] = '%';
+				count++;
+			}
+			else
+			{
+				if (BUFFER_SIZE > 0)
+				{
+					write(1, buffer, i);
+					count += i;
+					i = 0;
+					return (count);
+				}
+			}
+			string++;
+		}`
+	}
+	if (i > 0)
+		write(1, buffer, i);
+	return (count);
 }
 
+
+
+
+
+
+
+char *string_copy(const char *string)
+{
+	char *copy;
+	int i = 0;
+
+	while (string[i])
+		i++;
+	i++;
+	copy = malloc(sizeof(char) * i);
+	if (copy == NULL)
+		return (NULL);
+
+	for (i = 0; string[i]; i++)
+		copy[i] = string[i];
+	copy[i] = '\0';
+
+	return (copy);
+}
