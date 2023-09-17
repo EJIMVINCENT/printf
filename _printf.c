@@ -15,6 +15,7 @@ int _printf(const char *format, ...)
 	va_list arg_list;
 	int printed = 0, printedChar = 0;
 	check print_arg;
+	char i = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -24,11 +25,14 @@ int _printf(const char *format, ...)
 	format_copy = string_copy(format);
 	if (format_copy == NULL)
 	       return (-1);
-      
+
 	while (*format_copy != '\0')
 	{
 		if (*format_copy != '%')
+		{
 			printedChar += _printBuffer(format_copy);
+			format_copy++;
+		}
 
 		else 
 		{
@@ -49,10 +53,10 @@ int _printf(const char *format, ...)
 					break;
 			}
 			if (printed == -1)
-				return (-1);
+		       		return (-1);
 			printedChar += printed;
-		}
-		format_copy++;	
+			format_copy++;
+		}	
 	}
 	free(format_copy);
 	va_end(arg_list);
@@ -100,19 +104,20 @@ int _printBuffer(char *string)
 			}
 			else
 			{
-				if (BUFFER_SIZE > 0)
+				string--;
+				if (i > 0)
 				{
 					write(1, buffer, i);
 					count += i;
-					i = 0;
-					return (count);
 				}
+				return(count);
 			}
 			string++;
 		}
 	}
 	if (i > 0)
 		write(1, buffer, i);
+
 	return (count);
 }
 
@@ -131,6 +136,7 @@ char *string_copy(const char *string)
 		i++;
 	i++;
 	copy = malloc(sizeof(char) * i);
+
 	if (copy == NULL)
 		return (NULL);
 
