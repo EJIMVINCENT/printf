@@ -93,11 +93,10 @@ int *_printBuffer(const char *string, int count[2])
 			i++;
 			index++;
 
-			if (i == BUFFER_SIZE)
+			if (i >= BUFFER_SIZE)
 			{
 				printed += i; 
 				write(1, buffer, i);
-		
 				i = 0;
 			}
 		}
