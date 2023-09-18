@@ -5,12 +5,20 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+/**
+ * struct format - Struct op
+ *
+ * @c: character to be checked.
+ * @fc: The function associated.
+ *
+ */
+
 typedef struct format
 {
 	char c;
 	int (*fc)(va_list list);
 
-}check;
+} check;
 
 
 #define BUFFER_SIZE 1024

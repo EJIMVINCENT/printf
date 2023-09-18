@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+
 /**
  * _printf - the simple printf function
  *
@@ -12,12 +12,11 @@
 int _printf(const char *format, ...)
 {
 	va_list arg_list;
-	int printed = 0, p = 0, index = 0, i = 0;;
+	int printed = 0, p = 0, index = 0, i = 0;
 	char buffer[BUFFER_SIZE] = {0};
 
 	if (format == NULL)
 		return (-1);
-
 	va_start(arg_list, format);
 	for (index = 0; format[index] != '\0'; index++)
 	{
@@ -25,15 +24,13 @@ int _printf(const char *format, ...)
 		{
 			if (format[index + 1] == '%')
 			{
-				_putchar('%');
-				printed++;
+				_putchar('%'), printed++;
 			}
 			else
 			{
-				index++;
-				p = checkFormat(arg_list, format[index]);
+				p = checkFormat(arg_list, format[++index]);
 				if (p == -1)
-		       			return (-1);
+					return (-1);
 				printed += p;
 			}
 		}
@@ -41,10 +38,9 @@ int _printf(const char *format, ...)
 		{
 			buffer[i++] = format[index];
 			if (i >= BUFFER_SIZE)
-			{	
+			{
 				write(1, buffer, i);
-				printed += i;
-				i = 0;
+				printed += i, i = 0;
 			}
 		}
 	}
