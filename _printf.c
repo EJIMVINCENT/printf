@@ -23,7 +23,7 @@ int _printf(const char *format, ...)
 		if (format[index] == '%')
 		{
 			if (i > 0)
-				write (1, buffer, i), printed++, i = 0;
+				write (1, buffer, i), printed += i, i = 0;
 			if (format[index + 1] == '%')
 			{
 				_putchar('%'), printed++;
