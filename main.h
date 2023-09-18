@@ -17,7 +17,7 @@ typedef struct format
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-int _printBuffer(char *string);
+int *_printBuffer(const char *string, int count[]);
 int printString(int, ...);
 int printChar(int, ...);
 int printInt(int, ...);

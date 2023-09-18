@@ -11,56 +11,62 @@
 
 int _printf(const char *format, ...)
 {
-	char *format_copy;
 	va_list arg_list;
-	int printed = 0, printedChar = 0;
+	int printed = 0, p = 0, index;
 	check print_arg;
-	char i = 0;
+	int count[2];
+
+	count[1] = 0;
 
 	if (format == NULL)
 		return (-1);
 
 	va_start(arg_list, format);
-
-	format_copy = string_copy(format);
-	if (format_copy == NULL)
-	       return (-1);
-
-	while (*format_copy != '\0')
+	while (format[index] != '\0')
 	{
-		if (*format_copy != '%')
+		if (format[index] == '%')
 		{
-			printedChar += _printBuffer(format_copy);
-			format_copy++;
-		}
-
-		else 
-		{
-			print_arg = checkFormat(*format_copy);
-			switch(print_arg.c)
+			if (format[index + 1] == '%')
 			{
-				case 'i':
-					printed = print_arg.fc(0, va_arg(arg_list, int));
-					break;
-				case 'd':
-					printed = print_arg.fc(0, va_arg(arg_list, int));
-					break;
-				case 'c':
-					printed = print_arg.fc(0, va_arg(arg_list, int));
-					break;
-				case 's':
-					printed = print_arg.fc(0, va_arg(arg_list, char *));
-					break;
+				_putchar('%');
+				index++;
+				printed++;
 			}
-			if (printed == -1)
-		       		return (-1);
-			printedChar += printed;
-			format_copy++;
-		}	
+			else
+			{
+				index++;
+				print_arg = checkFormat(format[index]);
+				switch(print_arg.c)
+				{
+					case 'i':
+						p = print_arg.fc(0, va_arg(arg_list, int));
+						break;
+					case 'd':
+						p = print_arg.fc(0, va_arg(arg_list, int));
+						break;
+					case 'c':
+						p = print_arg.fc(0, va_arg(arg_list, int));
+						break;
+					case 's':
+						p = print_arg.fc(0, va_arg(arg_list, char *));
+						break;
+				}
+				index++;
+				if (printed == -1)
+		       			return (-1);
+				printed += p;
+			}
+		}
+		else
+		{
+			count[0] = index;
+			 _printBuffer(format, count);
+			index = count[0];
+			printed += count[1];
+		}
 	}
-	free(format_copy);
 	va_end(arg_list);
-	return (printedChar);
+	return (printed);
 }
 
 /**
@@ -72,52 +78,45 @@ int _printf(const char *format, ...)
  * Return: returns count (num of char printed)
  */
 
-int _printBuffer(char *string)
+int *_printBuffer(const char *string, int count[2])
 {
 	char buffer[BUFFER_SIZE];
-	int i = 0;
-	int count = 0;
+	int i = 0, index = 0, printed = 0;
 
-	while (*string != '\0')
+	count[0] = index;
+
+	while (string[index] != '\0')
 	{
-		if (*string != '%')
+		if (string[index] != '%')
 		{
-			buffer[i] = *string;
+			buffer[i] = string[index];
 			i++;
+			index++;
 
 			if (i == BUFFER_SIZE)
 			{
-				count += i; 
+				printed += i; 
 				write(1, buffer, i);
 		
 				i = 0;
 			}
-			string++;
 		}
-		else if (*string == '%')
+		else if (string[index] == '%')
 		{
-			string++;
-			if (*string == '%')
+			if (i > 0)
 			{
-				buffer[i++] = '%';
-				count++;
+				printed += i;
+				write(1, buffer, i);
 			}
-			else
-			{
-				string--;
-				if (i > 0)
-				{
-					write(1, buffer, i);
-					count += i;
-				}
-				return(count);
-			}
-			string++;
+			count[0] = index;
+			count[1] += printed;
+			return (count);
 		}
 	}
 	if (i > 0)
 		write(1, buffer, i);
-
+	count[0] = index;
+	count[1] += printed;
 	return (count);
 }
 

@@ -14,26 +14,21 @@
 
 check checkFormat(char character)
 {
-	check returnFormat;
 	int i = 0;
 	check formatCheck[] = {
 		{'c', printChar},
 		{'s', printString},
 		{'i', printInt},
 		{'d', printInt},
-		{0, NULL}
+		{'\0', NULL}
 	};
 
 	for (i = 0; formatCheck[i].c != '\0'; i++)
 	{
 		if (formatCheck[i].c == character)
 		{
-			returnFormat.c = formatCheck[i].c;
-			returnFormat.fc = formatCheck[i].fc;
-			return (returnFormat);
+			return (formatCheck[i]);
 		}
 	}
-	returnFormat.c = '\0';
-	returnFormat.fc = NULL;
-	return (returnFormat);
+	return (formatCheck[5]);
 }
