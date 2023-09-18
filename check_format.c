@@ -5,9 +5,9 @@
  * checkFormat - checks the format specifier and
  * returns a the approperate function
  *
- * @character - the character to be checked
- * @arg_list: list of arguments
+ * @list: list of arguments
  *
+ * @character: the character to be checked
  * Return: returns a function
  *
  */
@@ -27,7 +27,6 @@ int checkFormat(va_list list, char character)
 	{
 		if (formatCheck[i].c == character)
 		{
-			
 			return (formatCheck[i].fc(list));
 		}
 	}

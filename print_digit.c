@@ -1,5 +1,10 @@
-#include "main.h" 
-
+#include "main.h"
+/**
+ * printInt - Function to print Integer
+ *
+ * @list: list to check for Int Specifier
+ * Return: count
+ */
 int printInt(va_list list)
 {
 
@@ -10,7 +15,8 @@ int printInt(va_list list)
 	count = 0;
 	num = va_arg(list, int);
 
- 	if (num < 0)
+	if (num < 0)
+
 	{
 		_putchar('-');
 		count++;
@@ -23,10 +29,9 @@ int printInt(va_list list)
 	buffer = malloc(sizeof(char) * (1 + i));
 	if (buffer == NULL)
 		return (-1);
-		
+
 	i = 0;
-	do
-	{
+	do {
 		buffer[i++] = (num % 10) + '0';
 		num /= 10;
 	} while (num > 0);
