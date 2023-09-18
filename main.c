@@ -9,13 +9,10 @@
  */
 int main(void)
 {
-    int len;
+int len = 0;
 
- 
-
-    len = _printf("%c %c %s hello world \n",'a','c', "string'");
-	return(len);
-
+_printf("Character:[%c]\n", 'H');
+return (0);
 
 }
 

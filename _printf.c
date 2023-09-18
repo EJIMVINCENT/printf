@@ -22,6 +22,8 @@ int _printf(const char *format, ...)
 	{
 		if (format[index] == '%')
 		{
+			if (i > 0)
+				write (1, buffer, i), printed++, i = 0;
 			if (format[index + 1] == '%')
 			{
 				_putchar('%'), printed++;
@@ -47,7 +49,7 @@ int _printf(const char *format, ...)
 	if (i > 0)
 	{
 		write(1, buffer, i);
-		printed += i;
+		printed += i, i = 0;
 	}
 	va_end(arg_list);
 	return (printed);
