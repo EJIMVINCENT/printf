@@ -5,6 +5,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+
 /**
  * struct format - Struct op
  *
@@ -28,6 +29,9 @@ int _putchar(char c);
 int printString(va_list lis);
 int printChar(va_list list);
 int printInt(va_list list);
-int checkFormat(va_list list, char character);
+int (*checkFormat(char c))(va_list list);
+void printNumber(int num);
+int digitCount(int num);
+int _putString(char *string);
 
 #endif

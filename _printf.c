@@ -11,48 +11,44 @@
 
 int _printf(const char *format, ...)
 {
-	va_list arg_list;
-	int printed = 0, p = 0, index = 0, i = 0;
-	char buffer[BUFFER_SIZE] = {0};
+	va_list list;
+	int count;
+	int (*printFunc)(va_list);
+	const char *f;
 
-	if (format == NULL)
+
+	if (format == NULL || (format[0] == '%' && !format[1]))
 		return (-1);
-	va_start(arg_list, format);
-	for (index = 0; format[index] != '\0'; index++)
+	if (format[0] == '%' && format [1] == ' ' && !format[2])
+		return (-1);
+
+	va_start(list, format);
+	for (f = format; *f; f++)
 	{
-		if (format[index] == '%')
+		if (*f == '%')
 		{
-			if (i > 0)
-				write (1, buffer, i), printed += i, i = 0;
-			if (format[index + 1] == '%')
+			f++;
+			if (*f == '%')
 			{
-				_putchar('%'), printed++;
+				count = _putchar('%');
+				continue;
 			}
+
+			printFunc = checkFormat(*f);
+
+			if (printFunc != NULL)
+				count += printFunc(list);
 			else
-			{
-				p = checkFormat(arg_list, format[++index]);
-				if (p == -1)
-					return (-1);
-				printed += p;
-			}
+				count += _printf("%%%c", *f);
+
 		}
 		else
-		{
-			buffer[i++] = format[index];
-			if (i >= BUFFER_SIZE)
-			{
-				write(1, buffer, i);
-				printed += i, i = 0;
-			}
-		}
+			count += _putchar(*f);
 	}
-	if (i > 0)
-	{
-		write(1, buffer, i);
-		printed += i, i = 0;
-	}
-	va_end(arg_list);
-	return (printed);
+	
+	_putchar(-1);
+	va_end(list);
+	return (count);
 }
 
 

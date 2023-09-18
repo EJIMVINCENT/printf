@@ -12,7 +12,7 @@
  *
  */
 
-int checkFormat(va_list list, char character)
+int (*checkFormat(char c))(va_list)
 {
 	int i = 0;
 	check formatCheck[] = {
@@ -22,15 +22,13 @@ int checkFormat(va_list list, char character)
 		{'d', printInt},
 		{'\0', NULL}
 	};
-	if (character == ' ' || character == '\0')
-		return (-1);
 
 	for (i = 0; formatCheck[i].c != '\0'; i++)
 	{
-		if (formatCheck[i].c == character)
+		if (formatCheck[i].c == c)
 		{
-			return (formatCheck[i].fc(list));
+			return (formatCheck[i].fc);
 		}
 	}
-	return (-1);
+	return (NULL);
 }

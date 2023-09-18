@@ -1,4 +1,26 @@
 #include "main.h"
+
+
+
+
+int digitCount(int n)
+{
+	unsigned int count = 0;
+	unsigned int temp;
+
+	if (n < 0)
+		temp = n * -1;
+	else
+		temp = n;
+	while (temp != 0)
+	{
+		temp /= 10;
+		count++;
+	}
+	return (count);
+
+}
+
 /**
  * printInt - Function to print Integer
  *
@@ -7,40 +29,31 @@
  */
 int printInt(va_list list)
 {
+	int num = va_arg(list, int);	
+	int count = digitCount(num);
 
-	char *buffer;
-	int num, count;
-	int i = 0;
-
-	count = 0;
-	num = va_arg(list, int);
 
 	if (num < 0)
+		count++;
+	printNumber(num);
+	return(count);
+}
 
+
+
+void printNumber(int num)
+{
+	unsigned int temp;
+
+	if (num < 0)
 	{
 		_putchar('-');
-		count++;
-		num = -num;
+		temp = num * - 1;
 	}
+	else
+		temp = num;
 
-	while (num != 0)
-		num /= 10, i++;
-
-	buffer = malloc(sizeof(char) * (1 + i));
-	if (buffer == NULL)
-		return (-1);
-
-	i = 0;
-	do {
-		buffer[i++] = (num % 10) + '0';
-		num /= 10;
-	} while (num > 0);
-
-	while (i > 0)
-	{
-		_putchar(buffer[--i]);
-		count++;
-	}
-	free(buffer);
-	return (count);
+	if (temp / 10 != 0)
+		printNumber(temp / 10);
+	_putchar((temp % 10) + '0');
 }
