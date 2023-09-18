@@ -1,14 +1,14 @@
 #include "main.h" 
 
-int printInt(int i, ...)
+int printInt(va_list list)
 {
-	char buffer[20];	
-	va_list arg_list;
+
+	char *buffer;
 	int num, count;
+	int i = 0;
 
 	count = 0;
-	va_start(arg_list, i);
-	num = va_arg(arg_list, int);
+	num = va_arg(list, int);
 
  	if (num < 0)
 	{
@@ -17,18 +17,25 @@ int printInt(int i, ...)
 		num = -num;
 	}
 
+	while (num != 0)
+		num /= 10, i++;
+
+	buffer = malloc(sizeof(char) * (1 + i));
+	if (buffer == NULL)
+		return (-1);
+		
 	i = 0;
 	do
 	{
 		buffer[i++] = (num % 10) + '0';
 		num /= 10;
 	} while (num > 0);
-	
-	while (i > 0 && i <= 20)
+
+	while (i > 0)
 	{
 		_putchar(buffer[--i]);
 		count++;
 	}
-	va_end(arg_list);
+	free(buffer);
 	return (count);
 }

@@ -8,7 +8,7 @@
 typedef struct format
 {
 	char c;
-	int (*fc)(int, ...);
+	int (*fc)(va_list list);
 
 }check;
 
@@ -17,11 +17,9 @@ typedef struct format
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-void _printBuffer(const char *string, int count[]);
-int printString(int, ...);
-int printChar(int, ...);
-int printInt(int, ...);
-check checkFormat(char);
-char *string_copy(const char *string);
+int printString(va_list lis);
+int printChar(va_list list);
+int printInt(va_list list);
+int checkFormat(va_list list, char character);
 
 #endif
