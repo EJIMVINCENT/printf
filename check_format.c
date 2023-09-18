@@ -22,7 +22,7 @@ int checkFormat(va_list list, char character)
 		{'d', printInt},
 		{'\0', NULL}
 	};
-	if (c == ' ' || c == '\0')
+	if (character == ' ' || character == '\0')
 		return (-1);
 
 	for (i = 0; formatCheck[i].c != '\0'; i++)
