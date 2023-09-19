@@ -16,11 +16,17 @@ int _putchar(char c)
 	static char buffer[BUFFER_SIZE];
 	static int index;
 
-	if (c == -1 || index >= BUFFER_SIZE)
-		write(1, &buffer, index), index = 0;
+	if (c == 0 || index >= BUFFER_SIZE)
+	{
+		write(1, &buffer, index);
+		index = 0;
+	}
 
 	if (c != -1)
-		buffer[index] = c, index++;
+	{
+		buffer[index] = c;
+		index++;
+	}
 	return (1);
 }
 

@@ -26,7 +26,7 @@ typedef struct format
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-int printString(va_list lis);
+int printString(va_list list);
 int printChar(va_list list);
 int printInt(va_list list);
 int (*checkFormat(char c))(va_list list);
