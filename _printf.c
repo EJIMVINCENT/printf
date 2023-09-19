@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _printf - the simple printf function
+ * _printf - the simplem printf function
  *
  * @format: the string passed to _printf to be printed
  *
@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 
 	if (format == NULL || (format[0] == '%' && !format[1]))
 		return (-1);
-	if (format[0] == '%' && format [1] == ' ' && !format[2])
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
 	va_start(list, format);
@@ -45,7 +45,6 @@ int _printf(const char *format, ...)
 		else
 			count += _putchar(*f);
 	}
-	
 	_putchar(-1);
 	va_end(list);
 	return (count);

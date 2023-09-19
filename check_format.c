@@ -5,9 +5,8 @@
  * checkFormat - checks the format specifier and
  * returns a the approperate function
  *
- * @list: list of arguments
+ * @c: to be checked
  *
- * @character: the character to be checked
  * Return: returns a function
  *
  */
