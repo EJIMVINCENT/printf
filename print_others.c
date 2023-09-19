@@ -13,7 +13,7 @@ int printPercentSign(va_list list)
 {
 	(void)list;
 
-	return (_putchar(%));
+	return (_putchar('%'));
 }
 
 
