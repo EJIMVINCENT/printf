@@ -25,7 +25,7 @@ int _putchar(char c)
 	if (c != -1)
 	{
 		buffer[index] = c;
-		index;
+		index++;
 	}
 	return (1);
 }
