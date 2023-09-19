@@ -17,7 +17,6 @@ int printString(va_list list)
 	string = va_arg(list, char *);
 	if (string == NULL)
 		string = "(null)";
-	_putchar(character);
 	return (_putString(string));
 }
 
