@@ -12,9 +12,10 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	register int count = 0;
 	int (*printFunc)(va_list);
 	const char *f;
+
+	register int count = 0;
 
 
 	if (format == NULL || (format[0] == '%' && !format[1]))
@@ -30,7 +31,7 @@ int _printf(const char *format, ...)
 			f++;
 			if (*f == '%')
 			{
-				count = _putchar('%');
+				count += _putchar('%');
 				continue;
 			}
 
