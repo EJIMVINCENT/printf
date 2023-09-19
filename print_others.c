@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * prints percent sign
+ * printPercentSign - prints percent sign
  *
- * @list: arguments 
+ * @list: arguments
  *
  * Return: number of char printed
  *
