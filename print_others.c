@@ -44,7 +44,7 @@ int printNonPrint(va_list list, flags *f)
 		{
 			_putString("\\x");
 			count += 2;
-			temp = converter(s[i], 16, 0);
+			temp = converter(s[i], 16, 'u');
 			if (!temp[1])
 				count += _putchar('0');
 			count += _putString(temp);
