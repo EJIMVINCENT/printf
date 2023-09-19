@@ -11,7 +11,7 @@
  *
  */
 
-int (*checkFormat(char c))(va_list)
+int (*checkFormat(char c))(va_list, flags *)
 {
 	register int i = 0;
 	check formatCheck[] = {
@@ -25,6 +25,10 @@ int (*checkFormat(char c))(va_list)
 		{'o', printOcta},
 		{'x', printhex},
 		{'X', printHEX},
+		{'R', printRot13},
+		{'r', printRev},
+		{'S', printNonPrint},
+		{'p', printAddress},
 		{'\0', NULL}
 	};
 
@@ -36,4 +40,40 @@ int (*checkFormat(char c))(va_list)
 		}
 	}
 	return (NULL);
+}
+
+/**
+ * checkFlag - used to check if a flag was passed
+ *
+ * @s: character that holds the flag
+ * @f: pointer to the struct flags
+ *
+ * Return: 1 if a flag has been turned on, 0 otherwise
+ *
+ */
+
+int checkFlag(char s, flags *f)
+{
+	int i = 0;
+
+	switch (s)
+	{
+		case ' ':
+			f->space = 1;
+			i = 1;
+			break;
+
+		case '*':
+			f->plus = 1;
+			i = 1;
+			break;
+
+		case '#':
+			f->hash = 1;
+			i = 1;
+			break;
+
+	}
+
+	return (i);
 }

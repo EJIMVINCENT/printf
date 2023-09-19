@@ -5,7 +5,7 @@
  *
  * @n: number to be converter
  * @base: base of conversion
- * @case: lower or uppercase||for hex conversion
+ * @c: lower or uppercase||for hex conversion
  *
  * Return: result (the rsult of the conversion)
  *
@@ -40,15 +40,18 @@ char *converter(unsigned long int n, int base, char c)
  * print it.
  *
  * @list: va_list argument.
+ * @f: flag passed
  *
  * Return: returns the number of char printed
  *
  */
 
-int printBinary(va_list list)
+int printBinary(va_list list, flags *f)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *output = converter(n, 2, 'l');
+
+	(void)f;
 
 	return (_putString(output));
 }
@@ -57,17 +60,21 @@ int printBinary(va_list list)
  * printOcta - print a number in base 8
  *
  * @list: va_list argument
+ * @f: flag passed
  *
  * Return: count
  *
  */
 
 
-int printOcta(va_list list)
+int printOcta(va_list list, flags *f)
 {
 	unsigned int n = va_arg(list, unsigned int);
-	char *result = converter(n, 8, 'u');
+	char *result = converter(n, 8, 'l');
 	int count = 0;
+
+	if (f->hash == 1 && result[0] != '0')
+		count += _putchar('0');
 
 	count += _putString(result);
 	return (count);
@@ -77,16 +84,20 @@ int printOcta(va_list list)
  * printhex - print a number in lowercase base 16
  *
  * @list: va_list argument
+ * @f: flag passed
  *
  * Return: count
  *
  */
 
-int printhex(va_list list)
+int printhex(va_list list, flags *f)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *result = converter(n, 16, 'l');
 	int count = 0;
+
+	if (f->hash == 1 && result[0] != '0')
+		count += _putString("0x");
 
 	count += _putString(result);
 	return (count);
@@ -96,16 +107,20 @@ int printhex(va_list list)
  * printHEX - print a number in uppercase base 16
  *
  * @list: va_list argument
+ * @f: flag passed
  *
  * Return: count
  *
  */
 
-int printHEX(va_list list)
+int printHEX(va_list list, flags *f)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *result = converter(n, 16, 'u');
 	int count = 0;
+
+	if (f->hash == 1 && result[0] != '0')
+		count += _putString("0x");
 
 	count += _putString(result);
 	return (count);

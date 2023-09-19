@@ -12,8 +12,9 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int (*printFunc)(va_list);
+	int (*printFunc)(va_list, flags *);
 	const char *f;
+	flags flag = {0, 0, 0};
 
 	register int count = 0;
 
@@ -34,11 +35,11 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 				continue;
 			}
-
+			while (checkFlag(*f, &flag))
+				f++;
 			printFunc = checkFormat(*f);
-
 			if (printFunc != NULL)
-				count += printFunc(list);
+				count += printFunc(list, &flag);
 			else
 				count += _printf("%%%c", *f);
 
@@ -50,5 +51,3 @@ int _printf(const char *format, ...)
 	va_end(list);
 	return (count);
 }
-
-

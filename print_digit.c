@@ -35,13 +35,20 @@ int digitCount(int n)
  * then printNumber is called to print the number
  *
  * @list: list to check for Int Specifier
+ *@f: flag passed to _printf
  *
  * Return: count
  */
-int printInt(va_list list)
+
+int printInt(va_list list, flags *f)
 {
 	int num = va_arg(list, int);
 	int count = digitCount(num);
+
+	if (f->space == 1 && f->plus == 0 && num >= 0)
+		count += _putchar(' ');
+	if (f->plus == 1 && num >= 0)
+		count += _putchar('+');
 
 	if (num <= 0)
 		count++;
@@ -85,15 +92,18 @@ void printNumber(int num)
  * printUnsigned - prints an unsigned integer
  *
  * @list: va_list of arguments from _printf
+ * @f: flag pass
  *
  * Return: number of char printed
  *
  */
 
-int printUnsigned(va_list list)
+int printUnsigned(va_list list, flags *f)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *str = converter(n, 10, 0);
+
+	(void)f;
 
 	return (_putString(str));
 }
