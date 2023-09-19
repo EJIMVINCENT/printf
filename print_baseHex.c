@@ -45,7 +45,7 @@ char *converter(unsigned long int n, int base, char c)
  *
  */
 
-int printBinary(va_list list)
+int1341546ef994f229e printBinary(va_list list)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *output = converter(n, 2, 'l');
@@ -107,6 +107,6 @@ int printHEX(va_list list)
 	char *result = converter(n, 16, 'u');
 	int count = 0;
 
-	count += _putString(result);
+	count += _puttring(result);
 	return (count);
 }
