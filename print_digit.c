@@ -43,7 +43,7 @@ int printInt(va_list list)
 	int num = va_arg(list, int);
 	int count = digitCount(num);
 
-	if (num < 0)
+	if (num <= 0)
 		count++;
 	printNumber(num);
 	return (count);
@@ -69,7 +69,7 @@ void printNumber(int num)
 	else
 		temp = num;
 
-	if (temp / 10 != 0)
+	if (temp / 10)
 		printNumber(temp / 10);
 	_putchar((temp % 10) + '0');
 }

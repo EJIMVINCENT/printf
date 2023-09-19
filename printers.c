@@ -13,11 +13,11 @@
 
 int _putchar(char c)
 {
-	static char buffer[1024];
+	static char buffer[BUFFER_SIZE];
 	static int index;
 
-	if (c == -1 || index >= 1024)
-		write(1, buffer, index), index = 0;
+	if (c == -1 || index >= BUFFER_SIZE)
+		write(1, &buffer, index), index = 0;
 
 	if (c != -1)
 		buffer[index] = c, index++;
@@ -37,7 +37,7 @@ int _putchar(char c)
 
 int _putString(char *string)
 {
-	int i;
+	register int i;
 
 	for (i = 0; string[i] != '\0'; i++)
 		_putchar(string[i]);
