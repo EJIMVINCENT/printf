@@ -15,3 +15,9 @@ int printPercentSign(va_list list)
 
 	return (_putchar('%'));
 }
+
+
+
+
+
+

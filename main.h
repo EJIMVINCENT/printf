@@ -34,5 +34,12 @@ void printNumber(int num);
 int digitCount(int num);
 int _putString(char *string);
 int printPercentSign(va_list list);
+int printBinary(va_list list);
+int printUnsigned(va_list list);
+int printOcta(va_list list);
+int printhex(va_list list);
+int printHEX(va_list list);
+char *converter(unsigned long int n, int base, char case);
+
 
 #endif

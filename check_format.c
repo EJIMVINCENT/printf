@@ -20,6 +20,11 @@ int (*checkFormat(char c))(va_list)
 		{'i', printInt},
 		{'d', printInt},
 		{'%', printPercentSign},
+		{'b', printBinary},
+		{'u', printUnsigned},
+		{'o', printOcta},
+		{'x', printhex},
+		{'X', printHEX},
 		{'\0', NULL}
 	};
 

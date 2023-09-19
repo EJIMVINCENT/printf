@@ -1,4 +1,4 @@
-#include "main.h"
+#in1clude "main.h"
 
 /**
  * digitCount - counts the number of digits
@@ -74,3 +74,26 @@ void printNumber(int num)
 	_putchar((temp % 10) + '0');
 }
 
+
+
+
+
+
+
+
+/**
+ * printUnsigned - prints an unsigned integer
+ *
+ * @list: va_list of arguments from _printf
+ *
+ * Return: number of char printed
+ *
+ */
+
+int printUnsigned(va_list list)
+{
+	unsigned int n = va_arg(l, unsigned int);
+	char *str = converter(n, 10, 0);
+
+	return (_putString(str));
+}
