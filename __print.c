@@ -62,4 +62,27 @@ char *string_copy(const char *src) {
 	    //                                                                                                                                                                                                                                                             _printf("Let's try to printf a simple sentence.\n");
 	    //                                                                                                                                                                                                                                                                 return 0;
 	    //                                                                                                                                                                                                                                                                 }
-	    //
+	    /#include <stdio.h>
+#include <stdarg.h>
+	    
+	    int sum(int count, ...) {
+		        va_list args;
+			    va_start(args, count);
+			    
+			        int result = 0;
+				    for (int i = 0; i < count; i++) {
+					            int num = va_arg(args, int); // Fetch the next argument as an int
+						            result += num;
+							        }
+				    
+				        va_end(args); // Clean up the va_list
+					
+					    return result;
+	    }
+
+int main() {
+	    int total = sum(5, 1, 2, 3, 4, 5);
+	        printf("Sum: %d\n", total);
+		    return 0;
+}
+/
