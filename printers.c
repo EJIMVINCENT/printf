@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * _putchar - stores the character c in a buffer
@@ -16,7 +17,7 @@ int _putchar(char c)
 	static char buffer[BUFFER_SIZE];
 	static int index;
 
-	if (c == 0 || index >= BUFFER_SIZE)
+	if (c == -1 || index >= BUFFER_SIZE)
 	{
 		write(1, &buffer, index);
 		index = 0;

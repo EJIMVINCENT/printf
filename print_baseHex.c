@@ -26,8 +26,7 @@ char *converter(unsigned long int n, int base, char c)
 	*result = '\0';
 
 	do {
-		result--;
-		*result = alphanum[n % base];
+		*--result = alphanum[n % base];
 		n /= base;
 	} while (n != 0);
 

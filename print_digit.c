@@ -101,7 +101,7 @@ void printNumber(int num)
 int printUnsigned(va_list list, flags *f)
 {
 	unsigned int n = va_arg(list, unsigned int);
-	char *str = converter(n, 10, 0);
+	char *str = converter(n, 10, 'l');
 
 	(void)f;
 

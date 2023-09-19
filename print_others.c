@@ -141,7 +141,7 @@ int printAddress(va_list list, flags *f)
 
 	if (!p)
 		return (_putString("(nil)"));
-	string = converter(p, 16, 1);
+	string = converter(p, 16, 'l');
 	count += _putString("0x");
 	count += _putString(string);
 	return (count);

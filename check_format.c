@@ -58,13 +58,13 @@ int checkFlag(char s, flags *f)
 
 	switch (s)
 	{
-		case ' ':
-			f->space = 1;
+		case '+':
+			f->plus = 1;
 			i = 1;
 			break;
 
-		case '*':
-			f->plus = 1;
+		case ' ':
+			f->space = 1;
 			i = 1;
 			break;
 
