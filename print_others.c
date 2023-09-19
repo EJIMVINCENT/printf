@@ -3,7 +3,7 @@
 /**
  * printPercentSign - prints percent sign
  *
- * @list: arguments
+ * @list: argument list
  *
  * Return: number of char printed
  *
