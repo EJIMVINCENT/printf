@@ -81,13 +81,6 @@ void printNumber(int num)
 	_putchar((temp % 10) + '0');
 }
 
-
-
-
-
-
-
-
 /**
  * printUnsigned - prints an unsigned integer
  *
