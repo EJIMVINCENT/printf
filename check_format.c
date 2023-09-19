@@ -19,6 +19,7 @@ int (*checkFormat(char c))(va_list)
 		{'s', printString},
 		{'i', printInt},
 		{'d', printInt},
+		{'%', printPercentSign},
 		{'\0', NULL}
 	};
 

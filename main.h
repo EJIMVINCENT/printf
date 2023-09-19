@@ -33,5 +33,6 @@ int (*checkFormat(char c))(va_list list);
 void printNumber(int num);
 int digitCount(int num);
 int _putString(char *string);
+int printPercentSign(va_list list);
 
 #endif
