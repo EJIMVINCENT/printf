@@ -1,4 +1,4 @@
-#in1clude "main.h"
+#include "main.h"
 
 /**
  * digitCount - counts the number of digits
@@ -92,7 +92,7 @@ void printNumber(int num)
 
 int printUnsigned(va_list list)
 {
-	unsigned int n = va_arg(l, unsigned int);
+	unsigned int n = va_arg(list, unsigned int);
 	char *str = converter(n, 10, 0);
 
 	return (_putString(str));

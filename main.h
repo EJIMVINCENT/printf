@@ -39,7 +39,7 @@ int printUnsigned(va_list list);
 int printOcta(va_list list);
 int printhex(va_list list);
 int printHEX(va_list list);
-char *converter(unsigned long int n, int base, char case);
+char *converter(unsigned long int n, int base, char);
 
 
 #endif
