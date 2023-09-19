@@ -12,7 +12,7 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int count;
+	register int count = 0;
 	int (*printFunc)(va_list);
 	const char *f;
 

@@ -13,7 +13,7 @@
 
 int (*checkFormat(char c))(va_list)
 {
-	int i = 0;
+	register int i = 0;
 	check formatCheck[] = {
 		{'c', printChar},
 		{'s', printString},
