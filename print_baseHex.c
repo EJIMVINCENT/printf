@@ -107,6 +107,6 @@ int printHEX(va_list list)
 	char *result = converter(n, 16, 'u');
 	int count = 0;
 
-	count += _puttring(result);
+	count += _putString(result);
 	return (count);
 }

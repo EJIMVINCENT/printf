@@ -34,7 +34,7 @@ int printChar(va_list list)
 {
 	char character;
 
-	charcter = va_arg(list, int);
+	character = va_arg(list, int);
 	_putchar(character);
 	return (1);
 }
