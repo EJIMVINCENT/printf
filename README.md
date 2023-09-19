@@ -3,5 +3,5 @@ We implementing the c standard library printf function
 
 
 COLLABRATORS
-Ejim Onyedikachi Vincent (ejimovc@gmail.c)
-Eniade Mosese(moseseniade@gmail.com)
+Ejim Onyedikachi Vincent (ejimovc@gmail.com)
+Moses Eniade(moseseniade@gmail.com)
