@@ -83,6 +83,7 @@ int checkFlag(char s, flags *f)
  *
  * @s: charcter to be checked
  * @c: pinter to struct convs
+ * @list: poniter to list
  *
  * Return: 1 if specifer is found,
  * 0 otherwise.
