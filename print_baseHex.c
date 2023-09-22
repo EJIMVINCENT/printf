@@ -53,7 +53,7 @@ int printBinary(va_list list, flags *f, convs *c)
 	char *output = converter(n, 2, 'l');
 
 	(void)f;
-	while(output[i])
+	while (output[i])
 		i++;
 	count += printConvSpec(c->w - i);
 
@@ -107,10 +107,10 @@ int printhex(va_list list, flags *f, convs *c)
 
 	if (f->hash == 1 && result[0] != '0')
 		count += _putString("0x");
-	while(result[i])
+	while (result[i])
 		i++;
 	i += count;
-	count += printConvSpec(c->w - i);	
+	count += printConvSpec(c->w - i);
 	count += _putString(result);
 	return (count);
 }
@@ -135,7 +135,7 @@ int printHEX(va_list list, flags *f, convs *c)
 	if (f->hash == 1 && result[0] != '0')
 		count += _putString("0X");
 
-	while(result[i])
+	while (result[i])
 		i++;
 	i += count;
 	count += printConvSpec(c->w - i);
