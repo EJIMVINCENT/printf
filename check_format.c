@@ -93,7 +93,7 @@ int checkConvSpec(char s, convs *c, va_list list)
 {
 	int i = 0;
 	static char dot;
-	
+
 	if (s == '*')
 	{
 		i = va_arg(list, int);
@@ -108,15 +108,15 @@ int checkConvSpec(char s, convs *c, va_list list)
 		c->w *= 10;
 		i = s - '0';
 		c->w += i;
-	       return (1);	
+		return (1);
 	}
-	
+
 	else if (dot == '.' && (s > '0' && s < '9'))
 	{
 		c->p *= 10;
 		i = s - '0';
 		c->p += i;
-		return 1;
+		return (1);
 	}
 	return (0);
 
@@ -136,7 +136,7 @@ int printConvSpec(int n)
 	if (n < 0)
 		return (0);
 
-	while(n > 0)
+	while (n > 0)
 	{
 		i += _putchar(' ');
 		n--;
