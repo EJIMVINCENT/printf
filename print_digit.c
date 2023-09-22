@@ -43,14 +43,15 @@ int digitCount(long n)
 
 int printInt(va_list list, flags *f, convs *c)
 {
-	long num, count;
+	long num;
+	int count;
 
 	if (f->s == 1)
-		num = (short)va_arg(list, int);
+		num = va_arg(list, int);
 	else if (f->l == 1)
 		num = (long)va_arg(list, long);
 	else
-		num = (int)va_arg(list, int);
+		num = va_arg(list, int);
 	count = digitCount(num);
 
 	if (num <= 0)
@@ -113,7 +114,7 @@ int printUnsigned(va_list list, flags *f, convs *c)
 	unsigned long n;
 
 	if (f->s == 1)
-		n = (unsigned short)va_arg(list, unsigned int);
+		n = (unsigned int)va_arg(list, unsigned int);
 	else if (f->l == 1)
 		n = (unsigned long)va_arg(list, unsigned long);
 	else
