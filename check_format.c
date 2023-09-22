@@ -89,11 +89,17 @@ int checkFlag(char s, flags *f)
  *
  */
 
-int checkConvSpec(char s, convs *c)
+int checkConvSpec(char s, convs *c, va_list list)
 {
 	int i = 0;
 	static char dot;
 	
+	if (s == '*')
+	{
+		i = va_arg(list, int);
+		c->w += i;
+		return (1);
+	}
 	if (s == '.')
 		dot = '.';
 

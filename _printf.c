@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 			}
                         while (checkFlag(*f, &flag))
                                 f++;
-			while (checkConvSpec(*f, &c))
+			while (checkConvSpec(*f, &c, list))
 				f++;
 			printFunc = checkFormat(*f);
 			if (printFunc != NULL)

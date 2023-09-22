@@ -76,7 +76,7 @@ int printRot13(va_list list, flags *f, convs *c);
 int printNonPrint(va_list list, flags *f, convs *c);
 char *converter(unsigned long int n, int base, char);
 int checkFlag(char, flags *flag);
-int checkConvSpec(char s, convs *c);
+int checkConvSpec(char s, convs *c, va_list);
 int printConvSpec(int n);
 
 #endif

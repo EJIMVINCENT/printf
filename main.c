@@ -34,11 +34,20 @@ int main(void)
     printf("String:[%s]\n", "I am a string !");
     _printf("Address:[%p]\n", addr);
     printf("Address:[%p]\n", addr);
-    len = _printf("Percent:[%%]\n");
-    len2 = printf("Percent:[%%]\n");
-    _printf("Len:[%d]\n", len);
-    printf("Len:[%d]\n", len2);
-    _printf("Unknown:[%r]\n");
-    printf("Unknown:[r]\n");
+    _printf("In the middle %6i of a sentence.\n", 1024);
+    _printf("%6u", 102498402);
+    _printf("%6u", 0);
+    _printf("%6u", 1024);
+    _printf("In the middle %6u of a sentence.\n", 1024);
+    _printf("%6o", 102498402);
+    _printf("%6o", 0);
+    _printf("In the middle %6o of a sentence.\n", 1024);
+
+    _printf("%6s", "Hi!\n");
+    _printf("In the middle %6s of a sentence.\n", "Hey");
+    _printf("%*d", 6, 102498402);
+    _printf("%*d", 6, -102498402);
+    _printf("In the middle %*d of a sentence.\n", 6, 1024);
+    _printf("In the middle %*s of a sentence.\n", 6, "Hey");
     return (0);
 }
