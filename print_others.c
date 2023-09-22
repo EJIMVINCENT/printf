@@ -153,4 +153,5 @@ int printAddress(va_list list, flags *f, convs *c)
 		printConvSpec(c->w - count);
 		return (count);
 	}
+	return (count);
 }
