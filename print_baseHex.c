@@ -72,20 +72,20 @@ int printBinary(va_list list, flags *f, convs *c)
  *
  */
 
-
 int printOcta(va_list list, flags *f, convs *c)
 {
+	char *result;
+	int count = 0, i = 0;
 	unsigned long n;
 
-        if (f->s == 1)
-                n = (unsigned short)va_arg(list, int);
-        else if (f->l == 1)
-                n = (unsigned long)va_arg(list, unsigned long);
-        else
-                n = (unsigned int)va_arg(list, unsigned int);
+	if (f->s == 1)
+		n = (unsigned short)va_arg(list, int);
+	else if (f->l == 1)
+		n = (unsigned long)va_arg(list, unsigned long);
+	else
+		n = (unsigned int)va_arg(list, unsigned int);
 
-	char *result = converter(n, 8, 'l');
-	int count = 0, i = 0;
+	result = converter(n, 8, 'l');
 
 	if (f->hash == 1 && result[0] != '0')
 		count++;
@@ -111,9 +111,10 @@ int printOcta(va_list list, flags *f, convs *c)
 
 int printhex(va_list list, flags *f, convs *c)
 {
-        char *result;
-        int i = 0, count = 0;
+	char *result;
+	int i = 0, count = 0;
 	unsigned long n;
+
 	if (f->s == 1)
 		n = (unsigned short)va_arg(list, int);
 	else if (f->l == 1)
@@ -148,7 +149,7 @@ int printhex(va_list list, flags *f, convs *c)
 
 int printHEX(va_list list, flags *f, convs *c)
 {
-        char *result;
+	char *result;
 	int i = 0, count = 0;
 	unsigned long n;
 

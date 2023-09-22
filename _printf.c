@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 	va_list list;
 	int (*printFunc)(va_list, flags *, convs *);
 	const char *f;
-	flags flag = {0, 0, 0};
+	flags flag = {0, 0, 0, 0, 0};
 	convs c = {0, 0};
 
 	register int count = 0;

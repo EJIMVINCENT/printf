@@ -56,9 +56,9 @@ int printInt(va_list list, flags *f, convs *c)
 	if (num <= 0)
 		count++;
 	if (f->space == 1 && f->plus == 0 && num >= 0)
-		count ++;
+		count++;
 	if (f->plus == 1 && num >= 0)
-		count ++;
+		count++;
 	count += printConvSpec(c->w - count);
 
 	if (f->space == 1 && f->plus == 0 && num >= 0)
@@ -108,16 +108,18 @@ void printNumber(long num)
 
 int printUnsigned(va_list list, flags *f, convs *c)
 {
+	int i = 0, count = 0;
+	char *str;
 	unsigned long n;
+
 	if (f->s == 1)
 		n = (unsigned short)va_arg(list, unsigned int);
 	else if (f->l == 1)
 		n = (unsigned long)va_arg(list, unsigned long);
 	else
 		n = (unsigned int)va_arg(list, unsigned int);
-	int i = 0, count = 0;
 
-	char *str = converter(n, 10, 'l');
+	str = converter(n, 10, 'l');
 
 	while (str[i])
 		i++;
