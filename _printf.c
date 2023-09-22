@@ -12,9 +12,10 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int (*printFunc)(va_list, flags *);
+	int (*printFunc)(va_list, flags *, convs *);
 	const char *f;
 	flags flag = {0, 0, 0};
+	convs c = {0, 0};
 
 	register int count = 0;
 
@@ -35,11 +36,13 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 				continue;
 			}
-			while (checkFlag(*f, &flag))
+                        while (checkFlag(*f, &flag))
+                                f++;
+			while (checkConvSpec(*f, &c))
 				f++;
 			printFunc = checkFormat(*f);
 			if (printFunc != NULL)
-				count += printFunc(list, &flag);
+				count += printFunc(list, &flag, &c);
 			else
 				count += _printf("%%%c", *f);
 

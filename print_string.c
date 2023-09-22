@@ -11,11 +11,12 @@
  *
  */
 
-int printString(va_list list, flags *f)
+int printString(va_list list, flags *f, convs *c)
 {
 	char *string;
 
 	(void)f;
+	(void)c;
 
 	string = va_arg(list, char *);
 	if (string == NULL)
@@ -34,11 +35,12 @@ int printString(va_list list, flags *f)
  *
  */
 
-int printChar(va_list list, flags *f)
+int printChar(va_list list, flags *f, convs *c)
 {
 	char character;
 
 	(void)f;
+	(void)c;
 
 	character = va_arg(list, int);
 	_putchar(character);

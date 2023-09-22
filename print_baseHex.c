@@ -45,12 +45,16 @@ char *converter(unsigned long int n, int base, char c)
  *
  */
 
-int printBinary(va_list list, flags *f)
+int printBinary(va_list list, flags *f, convs *c)
 {
+	int i = 0;
 	unsigned int n = va_arg(list, unsigned int);
 	char *output = converter(n, 2, 'l');
 
 	(void)f;
+	while(output[i])
+		i++;
+	printConvSpec(c->w - i);
 
 	return (_putString(output));
 }
@@ -66,7 +70,7 @@ int printBinary(va_list list, flags *f)
  */
 
 
-int printOcta(va_list list, flags *f)
+int printOcta(va_list list, flags *f, convs *c)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *result = converter(n, 8, 'l');
@@ -76,6 +80,7 @@ int printOcta(va_list list, flags *f)
 		count += _putchar('0');
 
 	count += _putString(result);
+	printConvSpec(c->w - count);
 	return (count);
 }
 
@@ -89,15 +94,18 @@ int printOcta(va_list list, flags *f)
  *
  */
 
-int printhex(va_list list, flags *f)
+int printhex(va_list list, flags *f, convs *c)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *result = converter(n, 16, 'l');
-	int count = 0;
+	int i = 0, count = 0;
 
 	if (f->hash == 1 && result[0] != '0')
 		count += _putString("0x");
-
+	while(result[i])
+		i++;
+	i += count;
+	printConvSpec(c->w - i);	
 	count += _putString(result);
 	return (count);
 }
@@ -112,15 +120,19 @@ int printhex(va_list list, flags *f)
  *
  */
 
-int printHEX(va_list list, flags *f)
+int printHEX(va_list list, flags *f, convs *c)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *result = converter(n, 16, 'u');
-	int count = 0;
+	int i = 0, count = 0;
 
 	if (f->hash == 1 && result[0] != '0')
-		count += _putString("0x");
+		count += _putString("0X");
 
+	while(result[i])
+		i++;
+	i += count;
+	printConvSpec(c->w - i);
 	count += _putString(result);
 	return (count);
 }

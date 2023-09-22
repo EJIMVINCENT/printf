@@ -11,7 +11,7 @@
  *
  */
 
-int (*checkFormat(char c))(va_list, flags *)
+int (*checkFormat(char c))(va_list, flags *, convs *)
 {
 	register int i = 0;
 	check formatCheck[] = {
@@ -72,8 +72,62 @@ int checkFlag(char s, flags *f)
 			f->hash = 1;
 			i = 1;
 			break;
-
 	}
 
 	return (i);
+}
+
+/**
+ * checkConvSpec - handles the field width
+ * for non-custom conversion specifiers
+ *
+ * @s: charcter to be checked
+ * @c: pinter to struct convs
+ *
+ * Return: 1 if specifer is found,
+ * 0 otherwise.
+ *
+ */
+
+int checkConvSpec(char s, convs *c)
+{
+	int i = 0;
+	static char dot;
+	
+	if (s == '.')
+		dot = '.';
+
+	if (dot != '.' && (s > '0' && s < '9'))
+	{
+		c->w *= 10;
+		i = s - '0';
+		c->w += i;
+	       return (1);	
+	}
+	
+	else if (dot == '.' && (s > '0' && s < '9'))
+	{
+		c->p *= 10;
+		i = s - '0';
+		c->p += i;
+		return 1;
+	}
+	return (0);
+
+}
+
+/**
+ * printConvSpec - print space
+ * @n: number of space
+ */
+
+void printConvSpec(int n)
+{
+	int i = 0;
+
+	while(n > 0)
+	{
+		i += _putchar(' ');
+		n--;
+	}
 }

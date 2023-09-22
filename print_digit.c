@@ -35,12 +35,13 @@ int digitCount(int n)
  * then printNumber is called to print the number
  *
  * @list: list to check for Int Specifier
- *@f: flag passed to _printf
+ * @f: flag passed to _printf
+ * @c: pointer to struct convs
  *
  * Return: count
  */
 
-int printInt(va_list list, flags *f)
+int printInt(va_list list, flags *f, convs *c)
 {
 	int num = va_arg(list, int);
 	int count = digitCount(num);
@@ -52,6 +53,7 @@ int printInt(va_list list, flags *f)
 
 	if (num <= 0)
 		count++;
+	printConvSpec(c->w - count);	
 	printNumber(num);
 	return (count);
 }
@@ -91,12 +93,17 @@ void printNumber(int num)
  *
  */
 
-int printUnsigned(va_list list, flags *f)
+int printUnsigned(va_list list, flags *f, convs *c)
 {
+	int i = 0, count = 0;
 	unsigned int n = va_arg(list, unsigned int);
 	char *str = converter(n, 10, 'l');
 
 	(void)f;
 
-	return (_putString(str));
+	while (str[i])
+		i++;
+	printConvSpec(c->w - i);
+	count = _putString(str);
+	return (count);
 }

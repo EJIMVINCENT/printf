@@ -10,10 +10,11 @@
  *
  */
 
-int printPercentSign(va_list list, flags *f)
+int printPercentSign(va_list list, flags *f, convs *c)
 {
 	(void)list;
 	(void)f;
+	(void)c;
 
 	return (_putchar('%'));
 }
@@ -28,13 +29,14 @@ int printPercentSign(va_list list, flags *f)
  *
  */
 
-int printNonPrint(va_list list, flags *f)
+int printNonPrint(va_list list, flags *f, convs *c)
 {
 	int i, count = 0;
 	char *temp;
 	char *s = va_arg(list, char *);
 
 	(void)f;
+	(void)c;
 	if (!s)
 		return (_putString("(null)"));
 
@@ -66,12 +68,13 @@ int printNonPrint(va_list list, flags *f)
  *
  */
 
-int printRev(va_list list, flags *f)
+int printRev(va_list list, flags *f, convs *c)
 {
 	int i = 0, j = 0;
 	char *string = va_arg(list, char *);
 
 	(void)f;
+	(void)c;
 	if (!string)
 		string = "(null)";
 
@@ -94,7 +97,7 @@ int printRev(va_list list, flags *f)
  *
  */
 
-int printRot13(va_list list, flags *f)
+int printRot13(va_list list, flags *f, convs *c)
 {
 	int i, j;
 	char rot13[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -102,6 +105,7 @@ int printRot13(va_list list, flags *f)
 	char *string = va_arg(list, char *);
 
 	(void)f;
+	(void)c;
 	for (j = 0; string[j]; j++)
 	{
 		if (string[j] < 'A' || (string[j] >
@@ -130,7 +134,7 @@ int printRot13(va_list list, flags *f)
  *
  */
 
-int printAddress(va_list list, flags *f)
+int printAddress(va_list list, flags *f, convs *c)
 {
 	char *string;
 	unsigned long int p = va_arg(list, unsigned long int);
@@ -140,9 +144,13 @@ int printAddress(va_list list, flags *f)
 	(void)f;
 
 	if (!p)
-		return (_putString("(nil)"));
-	string = converter(p, 16, 'l');
-	count += _putString("0x");
-	count += _putString(string);
-	return (count);
+		count = (_putString("(nil)"));
+	else
+	{
+		string = converter(p, 16, 'l');
+		count += _putString("0x");
+		count += _putString(string);
+		printConvSpec(c->w - count);
+		return (count);
+	}
 }
