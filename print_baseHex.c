@@ -26,7 +26,7 @@ char *converter(unsigned long int n, int base, char c)
 	*result = '\0';
 
 	do {
-		*--result = alphanum[n % base];
+		*(--result) = alphanum[n % base];
 		n /= base;
 	} while (n != 0);
 
@@ -40,6 +40,7 @@ char *converter(unsigned long int n, int base, char c)
  *
  * @list: va_list argument.
  * @f: flag passed
+ * @c: pointer to convs struct
  *
  * Return: returns the number of char printed
  *
@@ -47,16 +48,17 @@ char *converter(unsigned long int n, int base, char c)
 
 int printBinary(va_list list, flags *f, convs *c)
 {
-	int i = 0;
+	int i = 0, count = 0;
 	unsigned int n = va_arg(list, unsigned int);
 	char *output = converter(n, 2, 'l');
 
 	(void)f;
 	while(output[i])
 		i++;
-	printConvSpec(c->w - i);
+	count += printConvSpec(c->w - i);
 
-	return (_putString(output));
+	count += _putString(output);
+	return (count);
 }
 
 /**
@@ -64,6 +66,7 @@ int printBinary(va_list list, flags *f, convs *c)
  *
  * @list: va_list argument
  * @f: flag passed
+ * @c: pointer to struct convs
  *
  * Return: count
  *
@@ -74,13 +77,14 @@ int printOcta(va_list list, flags *f, convs *c)
 {
 	unsigned int n = va_arg(list, unsigned int);
 	char *result = converter(n, 8, 'l');
-	int count = 0;
+	int count = 0, i = 0;
 
 	if (f->hash == 1 && result[0] != '0')
 		count += _putchar('0');
-
+	while (result[i])
+		i++;
+	count += printConvSpec(c->w - count);
 	count += _putString(result);
-	printConvSpec(c->w - count);
 	return (count);
 }
 
@@ -89,6 +93,7 @@ int printOcta(va_list list, flags *f, convs *c)
  *
  * @list: va_list argument
  * @f: flag passed
+ * @c: pointer to struct convs
  *
  * Return: count
  *
@@ -105,7 +110,7 @@ int printhex(va_list list, flags *f, convs *c)
 	while(result[i])
 		i++;
 	i += count;
-	printConvSpec(c->w - i);	
+	count += printConvSpec(c->w - i);	
 	count += _putString(result);
 	return (count);
 }
@@ -115,6 +120,7 @@ int printhex(va_list list, flags *f, convs *c)
  *
  * @list: va_list argument
  * @f: flag passed
+ * @c: pointer to struct convs
  *
  * Return: count
  *
@@ -132,7 +138,7 @@ int printHEX(va_list list, flags *f, convs *c)
 	while(result[i])
 		i++;
 	i += count;
-	printConvSpec(c->w - i);
+	count += printConvSpec(c->w - i);
 	count += _putString(result);
 	return (count);
 }

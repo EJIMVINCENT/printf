@@ -53,7 +53,8 @@ int printInt(va_list list, flags *f, convs *c)
 
 	if (num <= 0)
 		count++;
-	printConvSpec(c->w - count);	
+	count += printConvSpec(c->w - count);
+
 	printNumber(num);
 	return (count);
 }
@@ -88,6 +89,7 @@ void printNumber(int num)
  *
  * @list: va_list of arguments from _printf
  * @f: flag pass
+ * @c: pointer to struct convs
  *
  * Return: number of char printed
  *
@@ -103,7 +105,7 @@ int printUnsigned(va_list list, flags *f, convs *c)
 
 	while (str[i])
 		i++;
-	printConvSpec(c->w - i);
-	count = _putString(str);
+	count += printConvSpec(c->w - i);
+	count += _putString(str);
 	return (count);
 }

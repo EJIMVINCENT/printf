@@ -119,15 +119,21 @@ int checkConvSpec(char s, convs *c)
 /**
  * printConvSpec - print space
  * @n: number of space
+ *
+ * Return: return i or 0
  */
 
-void printConvSpec(int n)
+int printConvSpec(int n)
 {
 	int i = 0;
+
+	if (n < 0)
+		return (0);
 
 	while(n > 0)
 	{
 		i += _putchar(' ');
 		n--;
 	}
+	return (i);
 }

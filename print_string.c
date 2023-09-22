@@ -5,6 +5,7 @@
  *
  * @list: list where args are stored
  * @f: flag passed
+ * @c: pointer to struct convs
  *
  * Return: returns the number of char
  * printed
@@ -14,14 +15,17 @@
 int printString(va_list list, flags *f, convs *c)
 {
 	char *string;
-
+	int i = 0;
 	(void)f;
-	(void)c;
 
 	string = va_arg(list, char *);
 	if (string == NULL)
 		string = "(null)";
-	return (_putString(string));
+	while (string[i])
+		i++;
+	i += printConvSpec(c->w - i);
+	_putString(string);
+	return (i);
 }
 
 /**
@@ -29,6 +33,7 @@ int printString(va_list list, flags *f, convs *c)
  *
  * @list: list where args are stored
  * @f: flag passed
+ * @c: pointer to struct convs
  *
  * Return: returns the number of char
  * printed
@@ -38,12 +43,13 @@ int printString(va_list list, flags *f, convs *c)
 int printChar(va_list list, flags *f, convs *c)
 {
 	char character;
+	int i = 0;
 
 	(void)f;
-	(void)c;
 
 	character = va_arg(list, int);
-	_putchar(character);
-	return (1);
+	i += printConvSpec(c->w - 1);
+	i += _putchar(character);
+	return (i);
 }
 
