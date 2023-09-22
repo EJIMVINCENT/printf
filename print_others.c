@@ -5,7 +5,7 @@
  *
  * @list: argument list
  * @f: flag passed
- *
+ * @c: pointer to convs c
  * Return: number of char printed
  *
  */
@@ -24,7 +24,7 @@ int printPercentSign(va_list list, flags *f, convs *c)
  *
  * @list: va_list arguments from _printf
  * @f: pointer to the struct flags
- *
+ * @c: pointer to convs c
  * Return: number of char printed
  *
  */
@@ -63,7 +63,7 @@ int printNonPrint(va_list list, flags *f, convs *c)
  *
  * @list: list of arguments from _printf
  * @f: pointer to the struct flags
- *
+ * @c: pointer to convs c
  * Return: length of the printed string
  *
  */
@@ -92,7 +92,7 @@ int printRev(va_list list, flags *f, convs *c)
  *
  * @list: list of arguments from _printf
  * @f: pointer to the struct flags
- *
+ * @c: pointer to struct convsc
  * Return: length of the printed string
  *
  */
@@ -129,7 +129,7 @@ int printRot13(va_list list, flags *f, convs *c)
  *
  * @list: va_list arguments from _printf
  * @f: pointer to the struct flags
- *
+ * @c: pointer to struct convs
  * Return: number of char printed
  *
  */

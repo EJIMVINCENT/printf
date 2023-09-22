@@ -36,8 +36,8 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 				continue;
 			}
-                        while (checkFlag(*f, &flag))
-                                f++;
+			while (checkFlag(*f, &flag))
+				f++;
 			while (checkConvSpec(*f, &c, list))
 				f++;
 			printFunc = checkFormat(*f);
@@ -45,7 +45,6 @@ int _printf(const char *format, ...)
 				count += printFunc(list, &flag, &c);
 			else
 				count += _printf("%%%c", *f);
-
 		}
 		else
 			count += _putchar(*f);
