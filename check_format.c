@@ -83,7 +83,6 @@ int checkFlag(char s, flags *f)
 			i = 1;
 			break;
 	}
-
 	return (i);
 }
 
