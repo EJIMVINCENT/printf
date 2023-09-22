@@ -72,6 +72,16 @@ int checkFlag(char s, flags *f)
 			f->hash = 1;
 			i = 1;
 			break;
+
+		case 'l':
+			f->l = 1;
+			i = 1;
+			break;
+
+		case 'h':
+			f->s = 1;
+			i = 1;
+			break;
 	}
 
 	return (i);

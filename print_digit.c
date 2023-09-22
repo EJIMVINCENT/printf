@@ -11,10 +11,10 @@
  *
  */
 
-int digitCount(int n)
+int digitCount(long n)
 {
 	unsigned int count = 0;
-	unsigned int temp;
+	unsigned long temp;
 
 	if (n < 0)
 		temp = n * -1;
@@ -43,17 +43,28 @@ int digitCount(int n)
 
 int printInt(va_list list, flags *f, convs *c)
 {
-	int num = va_arg(list, int);
-	int count = digitCount(num);
+	long num, count;
 
-	if (f->space == 1 && f->plus == 0 && num >= 0)
-		count += _putchar(' ');
-	if (f->plus == 1 && num >= 0)
-		count += _putchar('+');
+	if (f->s == 1)
+		num = (short)va_arg(list, int);
+	else if (f->l == 1)
+		num = (long)va_arg(list, long);
+	else
+		num = (int)va_arg(list, int);
+	count = digitCount(num);
 
 	if (num <= 0)
 		count++;
+	if (f->space == 1 && f->plus == 0 && num >= 0)
+		count ++;
+	if (f->plus == 1 && num >= 0)
+		count ++;
 	count += printConvSpec(c->w - count);
+
+	if (f->space == 1 && f->plus == 0 && num >= 0)
+		_putchar(' ');
+	if (f->plus == 1 && num >= 0)
+		_putchar('+');
 
 	printNumber(num);
 	return (count);
@@ -67,9 +78,9 @@ int printInt(va_list list, flags *f, convs *c)
  *
  */
 
-void printNumber(int num)
+void printNumber(long num)
 {
-	unsigned int temp;
+	long temp;
 
 	if (num < 0)
 	{
@@ -97,11 +108,16 @@ void printNumber(int num)
 
 int printUnsigned(va_list list, flags *f, convs *c)
 {
+	unsigned long n;
+	if (f->s == 1)
+		n = (unsigned short)va_arg(list, unsigned int);
+	else if (f->l == 1)
+		n = (unsigned long)va_arg(list, unsigned long);
+	else
+		n = (unsigned int)va_arg(list, unsigned int);
 	int i = 0, count = 0;
-	unsigned int n = va_arg(list, unsigned int);
-	char *str = converter(n, 10, 'l');
 
-	(void)f;
+	char *str = converter(n, 10, 'l');
 
 	while (str[i])
 		i++;

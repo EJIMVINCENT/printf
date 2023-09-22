@@ -26,6 +26,8 @@ typedef struct convs
  * @plus: flag for the '+' character
  * @space: flag for the ' ' character
  * @hash: flag for the '#' character
+ * @s: flag for 'h' (short)
+ * @l: flag for 'l' (long)
  *
  */
 
@@ -34,6 +36,8 @@ typedef struct flags
 	int plus;
 	int space;
 	int hash;
+	int s;
+	int l;
 } flags;
 
 
@@ -61,8 +65,8 @@ int printString(va_list list, flags *f, convs *c);
 int printChar(va_list list, flags *f, convs *c);
 int printInt(va_list list, flags *f, convs *c);
 int (*checkFormat(char c))(va_list list, flags *f, convs *c);
-void printNumber(int num);
-int digitCount(int num);
+void printNumber(long num);
+int digitCount(long num);
 int _putString(char *string);
 int printPercentSign(va_list list, flags *f, convs *c);
 int printBinary(va_list list, flags *f, convs *c);

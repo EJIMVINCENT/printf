@@ -11,7 +11,7 @@
  *
  */
 
-char *converter(unsigned long int n, int base, char c)
+char *converter(unsigned long n, int base, char c)
 {
 	static char Buffer[50];
 	char *alphanum;
@@ -75,15 +75,25 @@ int printBinary(va_list list, flags *f, convs *c)
 
 int printOcta(va_list list, flags *f, convs *c)
 {
-	unsigned int n = va_arg(list, unsigned int);
+	unsigned long n;
+
+        if (f->s == 1)
+                n = (unsigned short)va_arg(list, int);
+        else if (f->l == 1)
+                n = (unsigned long)va_arg(list, unsigned long);
+        else
+                n = (unsigned int)va_arg(list, unsigned int);
+
 	char *result = converter(n, 8, 'l');
 	int count = 0, i = 0;
 
 	if (f->hash == 1 && result[0] != '0')
-		count += _putchar('0');
+		count++;
 	while (result[i])
 		i++;
-	count += printConvSpec(c->w - count);
+	count += printConvSpec(c->w - (count + i));
+	if (f->hash == 1 && result[0] != '0')
+		_putchar('0');
 	count += _putString(result);
 	return (count);
 }
@@ -101,16 +111,26 @@ int printOcta(va_list list, flags *f, convs *c)
 
 int printhex(va_list list, flags *f, convs *c)
 {
-	unsigned int n = va_arg(list, unsigned int);
-	char *result = converter(n, 16, 'l');
-	int i = 0, count = 0;
+        char *result;
+        int i = 0, count = 0;
+	unsigned long n;
+	if (f->s == 1)
+		n = (unsigned short)va_arg(list, int);
+	else if (f->l == 1)
+		n = (unsigned long)va_arg(list, unsigned long);
+	else
+		n = (unsigned int)va_arg(list, unsigned int);
+
+	result = converter(n, 16, 'l');
 
 	if (f->hash == 1 && result[0] != '0')
-		count += _putString("0x");
+		count += 2;
 	while (result[i])
 		i++;
 	i += count;
 	count += printConvSpec(c->w - i);
+	if (f->hash == 1 && result[0] != '0')
+		_putString("0x");
 	count += _putString(result);
 	return (count);
 }
@@ -128,17 +148,27 @@ int printhex(va_list list, flags *f, convs *c)
 
 int printHEX(va_list list, flags *f, convs *c)
 {
-	unsigned int n = va_arg(list, unsigned int);
-	char *result = converter(n, 16, 'u');
+        char *result;
 	int i = 0, count = 0;
+	unsigned long n;
+
+	if (f->s == 1)
+		n = (unsigned short)va_arg(list, int);
+	else if (f->l == 1)
+		n = (unsigned long)va_arg(list, unsigned long);
+	else
+		n = (unsigned int)va_arg(list, unsigned int);
+
+	result = converter(n, 16, 'u');
 
 	if (f->hash == 1 && result[0] != '0')
-		count += _putString("0X");
-
+		count += 2;
 	while (result[i])
-		i++;
+	i++;
 	i += count;
 	count += printConvSpec(c->w - i);
+	if (f->hash == 1 && result[0] != '0')
+		_putString("0X");
 	count += _putString(result);
 	return (count);
 }
