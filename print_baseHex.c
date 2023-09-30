@@ -17,6 +17,7 @@ char *converter(unsigned long n, int base, char c)
 	char *alphanum;
 	char *result;
 
+
 	if (c == 'l')
 		alphanum = "0123456789abcdef";
 	else if (c == 'u')
