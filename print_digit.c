@@ -85,7 +85,7 @@ void printNumber(long num)
 
 	if (num < 0)
 	{
-		_putchar('-');
+
 		temp = num * -1;
 	}
 	else
